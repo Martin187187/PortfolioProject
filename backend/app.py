@@ -6,13 +6,13 @@ app = FastAPI()
 # Replace with your actual frontend Render URL!
 origins = [
     "https://llminjectordemo.onrender.com/",
-    "http://localhost:3000",  # for local dev
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # allows only specified origins
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
