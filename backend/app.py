@@ -1,15 +1,23 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-class Input(BaseModel):
-    message: str
+# Replace with your actual frontend Render URL!
+origins = [
+    "https://llminjectordemo.onrender.com/",
+    "http://localhost:3000",  # for local dev
+]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # allows only specified origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Define your endpoints after this
 @app.get("/")
 def read_root():
-    return {"hello": "world"}
-
-@app.post("/api/predict")
-def predict(data: Input):
-    return {"response": f"You said: {data.message}"}
+    return {"message": "Hello from FastAPI"}
