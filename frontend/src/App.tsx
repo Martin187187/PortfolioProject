@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   useEffect(() => {
-    fetch("http://localhost:8000")
+    fetch(`${process.env.REACT_APP_API_URL}/some-endpoint`)
         .then((res) => res.json())
         .then((data) => console.log(data));
   }, []);
