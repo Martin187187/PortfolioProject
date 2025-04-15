@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+const API_BASE = process.env.REACT_APP_API_BASE_URL || "/api";
 function App() {
   const [data, setData] = useState<any>(null);  // State to store the JSON response
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}`)
+    fetch(API_BASE)
         .then((res) => res.json())
-        .then((data) => setData(data));  // Store the fetched data in the state
+        .then((data) => setData(data));
   }, []);
 
   return (

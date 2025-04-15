@@ -5,7 +5,6 @@ app = FastAPI()
 
 # Replace with your actual frontend Render URL!
 origins = [
-    "https://llminjectordemo.onrender.com",
     "http://localhost:3000",
 ]
 
