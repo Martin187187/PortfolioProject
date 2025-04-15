@@ -25,14 +25,15 @@ jobs:
           rsync -az --delete -e "ssh -i ~/.ssh/id_rsa" --exclude 'certbot/' ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/app
 
       - name: SSH and deploy
-        run: |
-          ssh -tt -o StrictHostKeyChecking=no -o LogLevel=ERROR -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            set -e
-            cd ~/app
-            docker compose down || true
-            docker compose build --no-cache
-            docker compose up -d
-            echo "Deployment complete"
-            exit 0
-          EOF
-
+  run: |
+    ssh -vvv -tt -o StrictHostKeyChecking=no -o LogLevel=ERROR -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+      set -e
+      cd ~/app
+      docker compose down || true
+      docker compose build --no-cache
+      docker compose up -d
+      nohup docker compose up -d & # Background Docker process
+      echo "✅ Deployment complete"
+      exit 0
+EOF
+    echo "SSH process finished with exit code $?"
