@@ -33,7 +33,7 @@ jobs:
             if [ -d ".git" ]; then
               git pull origin main
             else
-              git clone https://github.com/${{ github.repository }} . --branch main
+              git clone https://github.com/Martin187187/LLMInjectorDemo . --branch main
             fi
 
             # Run docker-compose
