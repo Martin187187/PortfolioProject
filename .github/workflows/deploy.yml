@@ -1,13 +1,12 @@
-name: Deploy via SSH
+name: Deploy to Server via SSH
 
 on:
   push:
     branches:
-      - main  # Change this to your default branch if needed
+      - main
 
 jobs:
   deploy:
-    name: Deploy to Server
     runs-on: ubuntu-latest
 
     steps:
@@ -21,22 +20,15 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy over SSH
+      - name: Sync files to server
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          rsync -az --delete -e "ssh -i ~/.ssh/id_rsa" ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/app
+
+      - name: SSH and deploy
+        run: |
+          ssh -tt ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             set -e
-            # Create directory if not exists
-            mkdir -p ~/app
             cd ~/app
-
-            # If repo already exists, pull; else, clone
-            if [ -d ".git" ]; then
-              git pull origin main
-            else
-              git clone https://github.com/Martin187187/LLMInjectorDemo . --branch main
-            fi
-
-            # Run docker-compose
             docker-compose down
             docker-compose build --no-cache
             docker-compose up -d
