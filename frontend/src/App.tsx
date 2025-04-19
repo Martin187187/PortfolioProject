@@ -1,39 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-const API_BASE = process.env.REACT_APP_API_BASE_URL || "/api";
-function App() {
-  const [data, setData] = useState<any>(null);  // State to store the JSON response
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import ProjectDetails from "./pages/ProjectDetails";
+import Projects from "./pages/Projects";
+import { CssBaseline } from "@mui/material";
+import UserMetadata from "./pages/UserMetadata";
 
-  useEffect(() => {
-    fetch(API_BASE)
-        .then((res) => res.json())
-        .then((data) => setData(data));
-  }, []);
+// Legal Pages
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
-  return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {/* Display the fetched JSON as text */}
-          <div>
-            <h3>Fetched Data:</h3>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
-          </div>
-        </header>
-      </div>
-  );
+export default function App() {
+    return (
+        <BrowserRouter>
+            {/* CssBaseline applied globally for consistent styling */}
+            <CssBaseline />
+
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="metadata" element={<UserMetadata />} />
+                    <Route path="projects" element={<Projects />} />
+                    <Route path="projects/:id" element={<ProjectDetails />} />
+
+                    {/* Add legal pages routes */}
+                    <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="terms-of-service" element={<TermsOfService />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
-
-export default App;
