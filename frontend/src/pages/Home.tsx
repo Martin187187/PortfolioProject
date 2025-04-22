@@ -2,7 +2,12 @@ import { GitHub, LinkedIn } from "@mui/icons-material";
 import { Typography, Paper, Box, Card, CardContent, CardMedia, Grid, Button, Divider, LinearProgress, IconButton, Link } from "@mui/material";
 import { styled } from '@mui/system';
 import Projects from "./Projects";
-
+import WorldCard from "../components/WorldCard";
+import CoordinateApp from "../components/CoordinateApp";
+import {Provider} from "react-redux";
+import {store} from "../store";
+import 'leaflet/dist/leaflet.css';
+import AddUserLocationOnce from "../components/AddCoordinateOnce";
 // Define custom colors for your theme
 const primaryColor = '#1c1c1c'; // Teal
 
@@ -133,6 +138,14 @@ const IntroText = styled(Typography)({
     marginRight: 'auto',
     textAlign: 'left',
 });
+
+
+const points = [
+    { lat: 40.7128, lng: -74.0060, number: 1 }, // New York
+    { lat: 34.0522, lng: -118.2437, number: 2 }, // Los Angeles
+    { lat: 51.5074, lng: -0.1278, number: 3 }, // London
+];
+
 export default function Home() {
     return (
         <>
@@ -182,6 +195,10 @@ export default function Home() {
                 </InfoCardContent>
             </InfoCard>
 
+            <Provider store={store}>
+                <AddUserLocationOnce/>
+                <WorldCard />
+            </Provider>
             {/* Skills with ranking */}
             <SectionHeader>Skills & Expertise</SectionHeader>
             <FlexContainer>
