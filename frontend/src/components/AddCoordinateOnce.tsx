@@ -1,46 +1,50 @@
-// src/CurrentLocationApp.tsx
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCoordinate } from '../store/coordinatesSlice';
 import { AppDispatch } from '../store';
-import axios from 'axios';
 
 const CurrentLocationApp: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [locationError, setLocationError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const getApproximateLocation = async () => {
+    const getLocationByIP = async () => {
         setLoading(true);
         setLocationError(null);
 
         try {
-            // Use ip-api to get approximate location based on IP address
-            const response = await axios.get('http://ip-api.com/json');
+            // Access the API token from environment variables
+            const apiToken = process.env.REACT_APP_IPINFO_TOKEN;
 
-            if (response.data.status === 'fail') {
-                setLocationError('Unable to get location from IP address');
-            } else {
-                const { lat, lon } = response.data;
-
-                // Dispatch the addCoordinate action with the approximate location
-                dispatch(
-                    addCoordinate({
-                        lat,
-                        lng: lon,
-                        number: Date.now(), // You can use a timestamp or other unique number
-                    })
-                );
-
+            if (!apiToken) {
+                setLocationError('API token is missing');
+                setLoading(false);
+                return;
             }
+
+            const response = await fetch(`https://ipinfo.io/json?token=${apiToken}`);
+            const data = await response.json();
+
+            // If the API returns coordinates
+            const [lat, lng] = data.loc.split(',');
+
+            // Dispatch the action with the location data
+            dispatch(
+                addCoordinate({
+                    lat: parseFloat(lat),
+                    lng: parseFloat(lng),
+                    number: Date.now(),
+                })
+            );
         } catch (error) {
-            setLocationError('Error fetching location');
+            setLocationError('Error fetching location by IP');
         } finally {
             setLoading(false);
         }
     };
+
     useEffect(() => {
-        getApproximateLocation();
+        getLocationByIP();
     }, [dispatch]);
 
     return null;
