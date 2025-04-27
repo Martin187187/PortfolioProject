@@ -37,6 +37,15 @@ const Footer: React.FC = () => {
                         Terms of Service
                     </Link>
                 </Typography>
+
+                <Typography variant="body2">
+                    <Link
+                        to="/impressum"
+                        style={{ color: 'white', textDecoration: 'none' }}
+                    >
+                        Impressum
+                    </Link>
+                </Typography>
             </Box>
 
             <Divider sx={{ my: 2, borderColor: 'white' }} /> {/* Divider line */}
