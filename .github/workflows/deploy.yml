@@ -22,7 +22,7 @@ jobs:
 
       - name: Sync files to server
         run: |
-          rsync -az --delete -e "ssh -i ~/.ssh/id_rsa" --exclude 'certbot/' ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/app
+          rsync -az --delete -e "ssh -i ~/.ssh/id_rsa" --exclude 'certbot/' --exclude '.env' ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/app
 
       - name: SSH and deploy
         run: |

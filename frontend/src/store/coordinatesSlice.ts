@@ -24,48 +24,13 @@ const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 export const addCoordinate = createAsyncThunk<Coordinate, Coordinate>(
     'coordinates/addCoordinate',
-    async (coordinate, { rejectWithValue }) => {
-        try {
-            const cachedLocationRaw = localStorage.getItem(CACHE_KEY);
-
-            if (cachedLocationRaw) {
-                const cachedLocation = JSON.parse(cachedLocationRaw);
-
-                const cacheTimestamp = new Date(cachedLocation.timestamp).getTime();
-                const now = Date.now();
-
-                if (now - cacheTimestamp < CACHE_DURATION_MS) {
-                    console.log('Using cached coordinate:', cachedLocation);
-                    // Cache still valid, return cached coordinate instead of posting again
-                    return {
-                        lat: cachedLocation.lat,
-                        lng: cachedLocation.lng,
-                        number: Date.now(), // New number (timestamp) to keep it unique
-                    };
-                }
-            }
-
-            console.log('Posting new coordinate:', coordinate);
-            // No valid cache found, post to server
-            await axios.post(`${API_BASE}/coordinates`, coordinate);
-
-            // Save the posted coordinate to cache
-            localStorage.setItem(
-                CACHE_KEY,
-                JSON.stringify({
-                    lat: coordinate.lat,
-                    lng: coordinate.lng,
-                    timestamp: new Date().toISOString(),
-                })
-            );
-
-            return coordinate;
-        } catch (error) {
-            console.error('Error in addCoordinate:', error);
-            return rejectWithValue('Failed to add coordinate');
-        }
+    async (coordinate) => {
+        console.log("add coordinate", coordinate);
+        await axios.post(`${API_BASE}/coordinates`, coordinate);
+        return coordinate;
     }
 );
+
 // Create the slice for coordinates
 const coordinatesSlice = createSlice({
     name: 'coordinates',

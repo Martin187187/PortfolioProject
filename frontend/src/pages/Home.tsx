@@ -2,12 +2,10 @@ import { GitHub, LinkedIn } from "@mui/icons-material";
 import { Typography, Paper, Box, Card, CardContent, CardMedia, Grid, Button, Divider, LinearProgress, IconButton, Link } from "@mui/material";
 import { styled } from '@mui/system';
 import Projects from "./Projects";
-import WorldCard from "../components/WorldCard";
-import CoordinateApp from "../components/CoordinateApp";
 import {Provider} from "react-redux";
 import {store} from "../store";
 import 'leaflet/dist/leaflet.css';
-import AddUserLocationOnce from "../components/AddCoordinateOnce";
+import DemoBanner from "../components/DemoBanner";
 // Define custom colors for your theme
 const primaryColor = '#1c1c1c'; // Teal
 
@@ -149,6 +147,8 @@ const points = [
 export default function Home() {
     return (
         <>
+
+            <DemoBanner /> {/* Add this line to render the demo banner */}
             <Typography variant="h3" gutterBottom>
                 Hi, I'm Martin Stemmer!
             </Typography>
@@ -194,12 +194,8 @@ export default function Home() {
                     </ContactButton>
                 </InfoCardContent>
             </InfoCard>
-
-            <Provider store={store}>
-                <AddUserLocationOnce/>
-                <WorldCard />
-            </Provider>
             {/* Skills with ranking */}
+            {/*
             <SectionHeader>Skills & Expertise</SectionHeader>
             <FlexContainer>
                 <FlexItem>
@@ -243,6 +239,7 @@ export default function Home() {
                 </FlexItem>
 
             </FlexContainer>
+            */}
             {/* Experience */}
             <SectionHeader>Work Experience</SectionHeader>
             <FlexContainer>
