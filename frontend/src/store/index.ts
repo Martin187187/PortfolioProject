@@ -1,10 +1,10 @@
 // src/store/index.ts
 import { configureStore } from '@reduxjs/toolkit';
-import coordinatesReducer from './coordinatesSlice';
+import gameReducer from './gameSlice';
 
 export const store = configureStore({
     reducer: {
-        coordinates: coordinatesReducer,
+        game: gameReducer,
     },
 });
 

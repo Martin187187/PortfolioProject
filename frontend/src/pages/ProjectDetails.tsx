@@ -79,17 +79,8 @@ const GithubButton = styled(Button)({
 });
 
 export default function ProjectDetails() {
-    const { id } = useParams<{ id: string }>();
-    const project = id ? projectDetails[parseInt(id)] : null;
 
-    if (!project) {
-        return (
-            <MainWrapper>
-                <Typography variant="h5">Project coming soon.</Typography>
-            </MainWrapper>
-        );
-    }
-
+    const project = projectDetails[0]
     return (
         <MainWrapper>
             <ContentWrapper>

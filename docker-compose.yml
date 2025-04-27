@@ -12,8 +12,10 @@ services:
       - "8000"
     depends_on:
       - mongo 
-    environment:
-      - MONGO_URL=mongodb://mongo:27017/mdb
+    env_file:
+      - .env
+    volumes:
+      - ${EMBEDDINGS_FILE}:/app/embeddings
 
   mongo:
     image: mongo

@@ -48,8 +48,8 @@ const ProjectDescription = styled(Typography)({
 export default function Projects() {
     const [projects] = useState([
         { id: 0, title: "My own webpage", description: "Fullstack Project", imageUrl: "https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fi%2Fe0nl7ziy1la7bpwj7rsp.png" },
-        { id: 1, title: "LLM Injector Demo", description: "Design Injection for Prompts", imageUrl: "https://miro.medium.com/v2/resize:fit:1024/1*z6ZJQXsdARI0ojY-AlGhZA.png" },
-        { id: 2, title: "Satisfactory Calculator", description: "Reinforcement Optimizer", imageUrl: "https://i.ytimg.com/vi/Jt4XOPiPJHs/sddefault.jpg" },
+        { id: 1, title: "Similar Words", description: "Word Embedding Demo", imageUrl: "https://miro.medium.com/v2/resize:fit:1400/1*KKqG9xsWkiDxloCJkpI39Q.png" },
+        //{ id: 2, title: "Satisfactory Calculator", description: "Reinforcement Optimizer", imageUrl: "https://i.ytimg.com/vi/Jt4XOPiPJHs/sddefault.jpg" },
     ]);
 
     return (
