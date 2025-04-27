@@ -13,6 +13,7 @@ import Game from "./components/Game";
 import {Provider} from "react-redux";
 import {store} from "./store";
 import SimilarWordsProject from "./pages/SimilarWordsProject";
+import Impressum from "./pages/Impressum";
 
 export default function App() {
     return (
@@ -32,7 +33,8 @@ export default function App() {
 
                         {/* Add legal pages routes */}
                         <Route path="privacy-policy" element={<PrivacyPolicy />} />
-                        <Route path="terms-of-services" element={<TermsOfService />} />
+                        <Route path="terms-of-service" element={<TermsOfService />} />
+                        <Route path="impressum" element={<Impressum />} />
                     </Route>
                 </Routes>
             </Provider>
