@@ -3,6 +3,9 @@ import uuid
 import time
 import random
 
+import uvicorn
+
+print("Starting server...")
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -218,3 +221,6 @@ def get_stats():
 @app.get("/")
 def read_root():
     return {"message": "Hello from FastAPI"}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
