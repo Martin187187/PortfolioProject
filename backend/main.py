@@ -100,7 +100,7 @@ def reveal_random_index(current_revealed: Set[int], word: str) -> Set[int]:
     """Reveals one random index, but max 50% revealed."""
     all_indexes = set(range(len(word)))
     unrevealed = list(all_indexes - current_revealed)
-    max_reveals = len(word) // 2  # up to 50% of the letters
+    max_reveals = (2 * len(word)) // 3
 
     if len(current_revealed) >= max_reveals:
         return current_revealed  # Already at 50%

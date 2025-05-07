@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Typography, Paper, Box, CircularProgress, ThemeProvider, createTheme, Autocomplete } from '@mui/material';
 import { AnswerResponse, fetchChallenge, submitAnswer, fetchWords } from '../store/gameSlice';
 import { RootState, AppDispatch } from '../store';
+import StatsCard from "./StatsCard";
 
 // Create the custom theme with primary color set to #1c1c1c
 const theme = createTheme({
@@ -98,6 +99,7 @@ const Game: React.FC = () => {
 
     return (
         <ThemeProvider theme={theme}> {/* Apply the custom theme */}
+            <StatsCard/>
             <Paper sx={{ padding: 4, maxWidth: 600, margin: 'auto', marginTop: 4 }}>
                 <Typography variant="h4" align="center" gutterBottom>
                     Word Challenge
@@ -159,14 +161,6 @@ const Game: React.FC = () => {
                                 >
                                     Play Again
                                 </Button>
-                            </Box>
-                        )}
-
-                        {stats && (
-                            <Box mt={4} textAlign="center">
-                                <Typography variant="body1">Total Challenges Created: {stats.total_challenges_created}</Typography>
-                                <Typography variant="body1">Total Challenges Solved: {stats.total_challenges_solved}</Typography>
-                                <Typography variant="body1">Average Tries: {stats.average_tries.toFixed(2)}</Typography>
                             </Box>
                         )}
                     </Box>
