@@ -119,7 +119,7 @@ export default function InfoPage() {
                         <GithubButton
                             variant="contained"
                             startIcon={<GitHubIcon />}
-                            href="https://github.com/your-repo-link" // GitHub repo link
+                            href="https://github.com/Martin187187/PortfolioProject" // GitHub repo link
                             rel="noopener noreferrer"
                         >
                             View Source Code
