@@ -1,13 +1,11 @@
 services:
   frontend:
     build: ./frontend
-    restart: always
     expose:
       - "80"
 
   backend:
     build: ./backend
-    restart: always
     expose:
       - "8000"
     depends_on:
@@ -15,11 +13,10 @@ services:
     env_file:
       - .env
     volumes:
-      - ${EMBEDDING_PATH}:/app/embeddings
+      - ${EMBEDDINGS_DIR}:/app/embeddings
 
   mongo:
     image: mongo
-    restart: always
     ports:
       - "27017"
     volumes:
@@ -27,7 +24,6 @@ services:
     
   reverse-proxy:
     build: ./reverse-proxy
-    restart: always
     ports:
       - "80:80"
       - "443:443"

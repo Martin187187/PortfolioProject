@@ -3,7 +3,6 @@ services:
     build:
       context: ./reverse-proxy
       dockerfile: Dockerfile.local
-    restart: always
     ports:
       - "80:80"
     depends_on:

@@ -82,6 +82,17 @@ export const submitAnswer = createAsyncThunk<AnswerResponse, { id: string; answe
     }
 );
 
+export const fetchStats = createAsyncThunk<Stats>(
+    'game/fetchStats',
+    async () => {
+        const response = await fetch(`${API_BASE}/stats`);
+        if (!response.ok) {
+            throw new Error("Failed to fetch stats");
+        }
+        return response.json();
+    }
+);
+
 const gameSlice = createSlice({
     name: 'game',
     initialState,
@@ -107,6 +118,9 @@ const gameSlice = createSlice({
                 state.totalWords = total;
                 state.currentPage = page;
                 state.pageSize = page_size;
+            })
+            .addCase(fetchStats.fulfilled, (state, action) => {
+                state.stats = action.payload;
             });
     },
 });

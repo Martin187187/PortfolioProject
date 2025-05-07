@@ -3,6 +3,9 @@ import uuid
 import time
 import random
 
+import uvicorn
+
+print("Starting server...")
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -97,7 +100,7 @@ def reveal_random_index(current_revealed: Set[int], word: str) -> Set[int]:
     """Reveals one random index, but max 50% revealed."""
     all_indexes = set(range(len(word)))
     unrevealed = list(all_indexes - current_revealed)
-    max_reveals = len(word) // 2  # up to 50% of the letters
+    max_reveals = (2 * len(word)) // 3
 
     if len(current_revealed) >= max_reveals:
         return current_revealed  # Already at 50%
@@ -218,3 +221,6 @@ def get_stats():
 @app.get("/")
 def read_root():
     return {"message": "Hello from FastAPI"}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
