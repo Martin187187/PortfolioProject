@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
             {/* Social Icons */}
             <Box sx={{ display: 'flex', gap: 3 }}>
                 <Link
-                    to="https://github.com/yourusername"
+                    to="https://github.com/Martin187187"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: 'white' }}
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
                     <GitHub />
                 </Link>
                 <Link
-                    to="https://www.linkedin.com/in/yourusername"
+                    to="https://www.linkedin.com/in/martin-stemmer-98168a349"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: 'white' }}

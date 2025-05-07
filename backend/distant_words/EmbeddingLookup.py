@@ -91,10 +91,10 @@ class EmbeddingLookup:
 
 if __name__ == "__main__":
     # Load a subset of words from a file
-    word_list_loader = WordListLoader("4000-most-common-eng.csv")  # Provide the path to your word list file
+    word_list_loader = WordListLoader("animal_names.csv")  # Provide the path to your word list file
 
     # Create the EmbeddingLookup with the subset of words
-    embeddings = EmbeddingLookup("/home/martin/Downloads/GoogleNews-vectors-negative300.bin.gz", word_list_loader)
+    embeddings = EmbeddingLookup("/home/martin/Downloads/embeddings/GoogleNews-vectors-negative300.bin.gz", word_list_loader)
 
     # Test the get_best_common_word method
-    print(embeddings.get_best_common_word("human", "dishwasher"))
+    print(embeddings.get_best_common_word("Donkey", "Monkey"))

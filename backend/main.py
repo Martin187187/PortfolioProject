@@ -42,7 +42,7 @@ challenges = {}
 
 # Constants
 CHALLENGE_EXPIRATION_SECONDS = 600  # 10 minutes
-word_list_loader = WordListLoader("distant_words/4000-most-common-eng.csv")
+word_list_loader = WordListLoader("distant_words/animal_names.csv")
 embedding_file = os.getenv("EMBEDDING_PATH")
 embeddings = EmbeddingLookup(embedding_file, word_list_loader)
 # Models
